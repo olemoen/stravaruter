@@ -40,7 +40,7 @@
         <script src="js/leaflet.wms.js"></script>
         <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
         <script src="js/leaflet-measure.js"></script>
-        <script src="data/Ruter_1.js"></script>
+        <script src="data/Ruter_2.js"></script>
         <script>
         var highlightLayer;
         function highlightFeature(e) {
@@ -113,7 +113,21 @@
             attribution: '',
         });
         map.addLayer(layer_Topografisknorgeskartgrtone_0);
-        function pop_Ruter_1(feature, layer) {
+        map.createPane('pane_Bratthet_snoskred_1');
+        map.getPane('pane_Bratthet_snoskred_1').style.zIndex = 401;
+        var layer_Bratthet_snoskred_1 = L.WMS.layer("https://nve.geodataonline.no/arcgis/services/Bratthet/MapServer/WMSServer", "Bratthet_snoskred", {
+            pane: 'pane_Bratthet_snoskred_1',
+            format: 'image/png',
+            uppercase: true,
+            transparent: true,
+            continuousWorld : true,
+            tiled: true,
+            info_format: 'text/html',
+            opacity: 1,
+            identify: false,
+            attribution: '',
+        });
+        function pop_Ruter_2(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     if (typeof layer.closePopup == 'function') {
@@ -138,9 +152,9 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Ruter_1_0() {
+        function style_Ruter_2_0() {
             return {
-                pane: 'pane_Ruter_1',
+                pane: 'pane_Ruter_2',
                 opacity: 1,
                 color: 'rgba(243,0,0,1.0)',
                 dashArray: '',
@@ -151,20 +165,20 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_Ruter_1');
-        map.getPane('pane_Ruter_1').style.zIndex = 401;
-        map.getPane('pane_Ruter_1').style['mix-blend-mode'] = 'normal';
-        var layer_Ruter_1 = new L.geoJson(json_Ruter_1, {
+        map.createPane('pane_Ruter_2');
+        map.getPane('pane_Ruter_2').style.zIndex = 402;
+        map.getPane('pane_Ruter_2').style['mix-blend-mode'] = 'normal';
+        var layer_Ruter_2 = new L.geoJson(json_Ruter_2, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Ruter_1',
-            layerName: 'layer_Ruter_1',
-            pane: 'pane_Ruter_1',
-            onEachFeature: pop_Ruter_1,
-            style: style_Ruter_1_0,
+            dataVar: 'json_Ruter_2',
+            layerName: 'layer_Ruter_2',
+            pane: 'pane_Ruter_2',
+            onEachFeature: pop_Ruter_2,
+            style: style_Ruter_2_0,
         });
-        bounds_group.addLayer(layer_Ruter_1);
-        map.addLayer(layer_Ruter_1);
+        bounds_group.addLayer(layer_Ruter_2);
+        map.addLayer(layer_Ruter_2);
         var osmGeocoder = new L.Control.Geocoder({
             collapsed: true,
             position: 'topleft',
@@ -176,7 +190,8 @@
         document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
         .title += 'Search for a place';
         var overlaysTree = [
-            {label: '<img src="legend/Ruter_1.png" /> Ruter', layer: layer_Ruter_1},
+            {label: '<img src="legend/Ruter_2.png" /> Ruter', layer: layer_Ruter_2},
+            {label: "Bratthet_snoskred", layer: layer_Bratthet_snoskred_1},
             {label: "Topografisk norgeskart gråtone", layer: layer_Topografisknorgeskartgrtone_0, radioGroup: 'bm' },]
         var lay = L.control.layers.tree(null, overlaysTree,{
             //namedToggle: true,
